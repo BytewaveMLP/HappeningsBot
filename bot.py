@@ -5,10 +5,12 @@ import os.path
 import sys
 import traceback
 
-if os.path.isFile('./config.ini'):
+config = configparser.ConfigParser()
+
+if os.path.isfile('./config.ini'):
 	config.read('./config.ini')
 else:
-	config['Command'] = {'Prefix': '+hb'
+	config['Command'] = {'Prefix': '+hb',
 						 'Subscribe': 'sub',
 						 'Unsubscribe': 'unsub',
 						 'Help': 'help'}
@@ -58,7 +60,7 @@ async def on_message(message):
 			if role.name == 'News':
 				news_role = role
 
-		if news_role = None:
+		if news_role == None:
 			await client.send_message(channel, '**ERROR:** No @News role found. Please create an @News role!')
 			return
 
