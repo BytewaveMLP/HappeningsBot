@@ -82,3 +82,23 @@ async def on_message(message):
 			await client.send_message(channel, user.mention + ' - Hi, I\'m ' + client.user.name + '! Here\'s what I\'m programmed to do:\n'
 				+ ' - **' + SUBSCRIBE + '** - Subscribes you to the News channel\n'
 				+ ' - **' + UNSUBSCRIBE + '** - Unsubscribes you from the News channel\n')
+
+@client.event
+async def on_error(event, *args, **kwargs):
+	ex = sys.exc_info()
+	print('!!!!!!')
+	print('ERROR:     ' + ex[0].__name__ + ' occurred in ' + event + '!')
+	print('           ' + str(ex[1]))
+	print('Traceback:')
+	print("".join(traceback.format_tb(ex[2])), end = '')
+	print('!!!!!!')
+
+@client.event
+async def on_server_join(server):
+	general = server.default_channel
+	if server.me.permissions_in(general).send_messages:
+		await client.send_message(general, "**Hey there!** I'm " + client.user.name + "! I help with subscribing to news and announcements.\n"
+			+ "If you want to see what I do, type **" + HELP + "** in chat!\n"
+			+ "*Made with <3 by Bytewave (https://github.com/BytewaveMLP/HappeningsBot)*\n")
+
+client.run(DISCORD_API_TOKEN)
