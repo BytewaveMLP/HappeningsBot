@@ -23,15 +23,15 @@ else:
 	print('[HB]: Edit config.ini before restarting.')
 	sys.exit(1)
 
-DISCORD_API_TOKEN = config.get('API Keys', 'Discord')
-COMMAND_PREFIX    = config.get('Command', 'Prefix')
-COMMAND_SUBSCRIBE = config.get('Command', 'Subscribe')
-COMMAND_SUBSCRIBE = config.get('Command', 'Unsubscribe')
-COMMAND_HELP      = config.get('Command', 'Help')
-SUBSCRIBE         = COMMAND_PREFIX + COMMAND_SUBSCRIBE
-UNSUBSCRIBE       = COMMAND_PREFIX + COMMAND_UNSUBSCRIBE
-HELP              = COMMAND_PREFIX + COMMAND_HELP
-GAME_STATUS       = HELP + ' for help'
+DISCORD_API_TOKEN   = config.get('API Keys', 'Discord')
+COMMAND_PREFIX      = config.get('Command', 'Prefix')
+COMMAND_SUBSCRIBE   = config.get('Command', 'Subscribe')
+COMMAND_UNSUBSCRIBE = config.get('Command', 'Unsubscribe')
+COMMAND_HELP        = config.get('Command', 'Help')
+SUBSCRIBE           = COMMAND_PREFIX + COMMAND_SUBSCRIBE
+UNSUBSCRIBE         = COMMAND_PREFIX + COMMAND_UNSUBSCRIBE
+HELP                = COMMAND_PREFIX + COMMAND_HELP
+GAME_STATUS         = HELP + ' for help'
 
 client = discord.Client()
 helpgame = discord.Game(name = GAME_STATUS, url = '', type = 0)
@@ -71,12 +71,12 @@ async def on_message(message):
 					return
 
 			await client.add_roles(user, news_role)
-			await clent.send_message(channel, user.mention + ' - Successfully subscribed to News!')
+			await client.send_message(channel, user.mention + ' - Successfully subscribed to News!')
 		elif content == UNSUBSCRIBE:
 			for role in user.roles:
 				if role == news_role:
 					await client.remove_roles(user, news_role)
-					await clent.send_message(channel, user.mention + ' - Successfully unsubscribed from News!')
+					await client.send_message(channel, user.mention + ' - Successfully unsubscribed from News!')
 					return
 
 			await client.send_message(channel, user.mention + ' - You aren\'t subscribed!')
