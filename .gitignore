@@ -90,3 +90,6 @@ ENV/
 
 # Custom config file
 config.ini
+
+# Log files
+happenings-bot.log
