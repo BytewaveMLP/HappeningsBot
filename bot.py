@@ -54,11 +54,7 @@ async def on_message(message):
 
 	if not user.bot and content in (SUBSCRIBE, UNSUBSCRIBE, HELP):
 		await client.send_typing(channel)
-		news_role = None
-
-		for role in server.roles:
-			if role.name == 'News':
-				news_role = role
+		news_role = discord.utils.get(server.roles, name = "News")
 
 		if news_role == None:
 			await client.send_message(channel, '**ERROR:** No @News role found. Please create an @News role!')
